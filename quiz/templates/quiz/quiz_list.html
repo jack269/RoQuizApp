@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load quiz_tags %}
+{% block title %}{% trans "All Quizzes" %}{% endblock %}
+
+{% block content %}
+<h2>{% trans "Lista quiz-uri" %}</h2>
+    {% if quiz_list %}
+		<table class="table table-bordered table-striped">
+
+		  <thead>
+			<tr>
+			  <th>{% trans "Titlu" %}</th>
+			  <th>{% trans "Categorie" %}</th>
+
+			  <th></th>
+			</tr>
+		  </thead>
+
+		  <tbody>
+
+        {% for quiz in quiz_list %}
+
+  			<tr>
+			  <td>{{ quiz.title }}</td>
+			  <td>{{ quiz.category }}</td>
+
+			  <td>
+				<a href="{% url 'quiz_start_page' slug=quiz.url %}">
+				  {% trans "Detalii" %}
+				</a>
+			</tr>
+
+        {% endfor %}
+		  </tbody>
+
+		</table>
+
+	{% else %}
+        <p>{% trans "Nu exista quiz-uri" %}.</p>
+    {% endif %}
+{% endblock %}
